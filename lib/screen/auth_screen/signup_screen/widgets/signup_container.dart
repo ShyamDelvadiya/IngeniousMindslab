@@ -161,7 +161,7 @@ class _SignupContainerState extends State<SignupContainer> {
                     },
                     child: const Center(
                       child: Text(
-                        'Already have an account? \n click here',
+                        StringConstant.alreadyHaveAcc,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: AppColor.whiteColor,

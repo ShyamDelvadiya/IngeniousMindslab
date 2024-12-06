@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ingenious_mindslab/common_widgets/common_bottom_background.dart';
@@ -48,12 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
       children: [
         const CommonHomeBackground(),
         const CommonBottomBackground(),
-        Center(
-          child: LoadingAnimationWidget.inkDrop(
-            color: AppColor.primary,
-            size: 50,
-          ),
-        ),
+        Center(child: SvgPicture.asset(Images.appLogo,color: AppColor.whiteColor,)),
       ],
     );
   }

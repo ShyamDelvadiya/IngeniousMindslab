@@ -7,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:ingenious_mindslab/model/country_details_model.dart';
 import 'package:ingenious_mindslab/routes/routes_path.dart';
 import 'package:ingenious_mindslab/utils/common_helpers.dart';
 import 'package:ingenious_mindslab/utils/dialog_utils.dart';

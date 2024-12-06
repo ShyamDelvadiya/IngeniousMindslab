@@ -17,5 +17,7 @@ class StringConstant{
   static const String emailHintTxt = 'Enter Your Email';
   static const String passwordHintTxt = 'Enter Your Password';
   static const String confirmPasswordHintTxt = 'Confirm Your Password';
+  static const String registerAcc = 'Register a new account?\n click here';
+  static const String alreadyHaveAcc = 'Already have an account? \n click here';
 
 }

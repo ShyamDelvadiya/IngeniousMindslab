@@ -34,7 +34,7 @@ class AppRoutes {
       name: details,
       transition: Transition.zoom,
       page: () => const DetailsScreen(),
-      transitionDuration: const Duration(milliseconds: 700),
+      transitionDuration: const Duration(milliseconds: 400),
     ),
   ];
 }

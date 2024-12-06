@@ -111,7 +111,7 @@ class LoginContainer extends StatelessWidget {
                 },
                 child: const Center(
                   child: Text(
-                    'Register a new account?\n click here',
+                    StringConstant.registerAcc,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: AppColor.whiteColor,
