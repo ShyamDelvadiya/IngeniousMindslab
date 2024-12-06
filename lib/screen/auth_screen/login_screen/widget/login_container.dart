@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ingenious_mindslab/common_widgets/common_button.dart';
 import 'package:ingenious_mindslab/common_widgets/common_textfield.dart';
+import 'package:ingenious_mindslab/getx/controller/main_controller.dart';
 import 'package:ingenious_mindslab/routes/routes_path.dart';
 import 'package:ingenious_mindslab/utils/color_constant.dart';
 import 'package:ingenious_mindslab/utils/size_constant.dart';
@@ -12,10 +13,8 @@ class LoginContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MainController controller = Get.find<MainController>();
     final formKey = GlobalKey<FormState>();
-    bool obscureText = false;
-    TextEditingController mobileNumberController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -50,12 +49,12 @@ class LoginContainer extends StatelessWidget {
                 child: Center(
                   child: CustomTextFormField(
                       hintText: StringConstant.emailHintTxt,
-                      controller: mobileNumberController,
+                      controller: controller.loginEmailController,
                       fillColorBool: true,
                       fillColor: AppColor.suggestionColor2,
                       hintstyle: const TextStyle(color: AppColor.grey),
-                      isPhone: true,
-                      textInputType: TextInputType.phone),
+                      isEmail: true,
+                      textInputType: TextInputType.emailAddress),
                 ),
               ),
               Padding(
@@ -65,22 +64,27 @@ class LoginContainer extends StatelessWidget {
                   top: PaddingConstant.maximumPadding,
                   right: PaddingConstant.mainPagePadding,
                 ),
-                child: CustomTextFormField(
-                  obscureText: obscureText,
-                  fillColorBool: true,
-                  fillColor: AppColor.suggestionColor2,
-                  suffixImage: GestureDetector(
-                    onTap: () {},
-                    child: Icon(
-                      obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: AppColor.whiteColor,
-                    ),
-                  ),
-                  hintstyle: const TextStyle(color: AppColor.grey),
-                  hintText: StringConstant.passwordHintTxt,
-                  isPassword: true,
-                  controller: passwordController,
-                ),
+                child: Obx(() => CustomTextFormField(
+                      obscureText: controller.obscureLoginPwdText.value,
+                      fillColorBool: true,
+                      fillColor: AppColor.suggestionColor2,
+                      suffixImage: GestureDetector(
+                        onTap: () {
+                          controller.obscureLoginPwdText.value =
+                              !controller.obscureLoginPwdText.value;
+                        },
+                        child: Icon(
+                          controller.obscureLoginPwdText.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: AppColor.whiteColor,
+                        ),
+                      ),
+                      hintstyle: const TextStyle(color: AppColor.grey),
+                      hintText: StringConstant.passwordHintTxt,
+                      isPassword: true,
+                      controller: controller.loginPasswordController,
+                    )),
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -89,7 +93,12 @@ class LoginContainer extends StatelessWidget {
                     right: PaddingConstant.mainPagePadding),
                 child: CustomButton(
                   onPressed: () {
-                    if (formKey.currentState?.validate() ?? false) {}
+                    if (formKey.currentState?.validate() ?? false) {
+                      controller.loginUser(
+                        email: controller.loginEmailController.text,
+                        pwd: controller.loginPasswordController.text,
+                      );
+                    }
                   },
                   text: StringConstant.login,
                 ),
@@ -102,7 +111,8 @@ class LoginContainer extends StatelessWidget {
                 },
                 child: const Center(
                   child: Text(
-                    'Register a new account?, click here',
+                    'Register a new account?\n click here',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: AppColor.whiteColor,
                         fontWeight: FontWeight.bold,

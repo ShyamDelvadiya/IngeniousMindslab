@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:ingenious_mindslab/common_widgets/common_bottom_background.dart';
 import 'package:ingenious_mindslab/common_widgets/common_home_background.dart';
 import 'package:ingenious_mindslab/getx/controller/main_controller.dart';
 import 'package:ingenious_mindslab/routes/routes_path.dart';
 import 'package:ingenious_mindslab/utils/color_constant.dart';
 import 'package:ingenious_mindslab/utils/image_constants.dart';
+import 'package:ingenious_mindslab/utils/pref_constants.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,11 +19,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final MainController controller = Get.find<MainController>();
+  final GetStorage box = GetStorage(); // Initialize GetStorage
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     _routeToLoginScreen();
   }
 
@@ -44,14 +49,9 @@ class _SplashScreenState extends State<SplashScreen> {
         const CommonHomeBackground(),
         const CommonBottomBackground(),
         Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                Images.splashImg,
-                width: MediaQuery.of(context).size.width,
-              ),
-            ],
+          child: LoadingAnimationWidget.inkDrop(
+            color: AppColor.primary,
+            size: 50,
           ),
         ),
       ],
@@ -59,10 +59,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _routeToLoginScreen() async {
+    bool? isUserLogin = box.read(PrefConstants.isUserLoggedIn);
+
     await Future.delayed(
       Duration(seconds: controller.seconds),
       () {
-        Get.offAllNamed(login);
+        if (isUserLogin ?? false) {
+          Get.offAllNamed(home);
+        } else {
+          Get.offAllNamed(login);
+        }
       },
     );
   }

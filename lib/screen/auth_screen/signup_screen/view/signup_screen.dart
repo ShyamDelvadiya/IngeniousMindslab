@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_mindslab/common_widgets/common_bottom_background.dart';
 import 'package:ingenious_mindslab/common_widgets/common_home_background.dart';
-import 'package:ingenious_mindslab/screen/auth_screen/login_screen/widget/login_container.dart';
 import 'package:ingenious_mindslab/screen/auth_screen/signup_screen/widgets/signup_container.dart';
 import 'package:ingenious_mindslab/utils/color_constant.dart';
 
