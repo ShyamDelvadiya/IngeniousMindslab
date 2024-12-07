@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ingenious_mindslab/routes/routes_path.dart';
@@ -18,8 +17,6 @@ class MainController extends GetxController {
   final int seconds = 3;
   RxBool isLoading = false.obs;
   final GetStorage box = GetStorage(); // Initialize GetStorage
-  TextEditingController loginEmailController = TextEditingController();
-  TextEditingController loginPasswordController = TextEditingController();
   int batchSize = 100; // Define a batch size
 
   RxBool obscureSignUpPwdText = true.obs;
@@ -128,7 +125,6 @@ class MainController extends GetxController {
       if (connectivityResult == ConnectivityResult.none) {
         throw Exception('No internet connection. Unable to seed data.');
       }
-
 
       var response = await http.get(
         Uri.parse(

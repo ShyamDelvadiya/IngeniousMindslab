@@ -15,7 +15,8 @@ class LoginContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final MainController controller = Get.find<MainController>();
     final formKey = GlobalKey<FormState>();
-
+    TextEditingController loginEmailController = TextEditingController();
+    TextEditingController loginPasswordController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.only(
         left: PaddingConstant.maximumPadding,
@@ -49,7 +50,7 @@ class LoginContainer extends StatelessWidget {
                 child: Center(
                   child: CustomTextFormField(
                       hintText: StringConstant.emailHintTxt,
-                      controller: controller.loginEmailController,
+                      controller: loginEmailController,
                       fillColorBool: true,
                       fillColor: AppColor.suggestionColor2,
                       hintstyle: const TextStyle(color: AppColor.grey),
@@ -83,7 +84,7 @@ class LoginContainer extends StatelessWidget {
                       hintstyle: const TextStyle(color: AppColor.grey),
                       hintText: StringConstant.passwordHintTxt,
                       isPassword: true,
-                      controller: controller.loginPasswordController,
+                      controller: loginPasswordController,
                     )),
               ),
               Padding(
@@ -95,8 +96,8 @@ class LoginContainer extends StatelessWidget {
                   onPressed: () {
                     if (formKey.currentState?.validate() ?? false) {
                       controller.loginUser(
-                        email: controller.loginEmailController.text,
-                        pwd: controller.loginPasswordController.text,
+                        email: loginEmailController.text,
+                        pwd: loginPasswordController.text,
                       );
                     }
                   },

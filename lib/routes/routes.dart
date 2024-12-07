@@ -16,19 +16,19 @@ class AppRoutes {
       name: login,
       transition: Transition.rightToLeft,
       page: () => const LoginScreen(),
-      transitionDuration: const Duration(milliseconds: 600),
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: singUp,
       transition: Transition.rightToLeft,
       page: () => const SignupScreen(),
-      transitionDuration: const Duration(milliseconds: 600),
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: home,
       transition: Transition.zoom,
       page: () => const HomeScreen(),
-      transitionDuration: const Duration(milliseconds: 700),
+      transitionDuration: const Duration(milliseconds: 500),
     ),
     GetPage(
       name: details,
